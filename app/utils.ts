@@ -1,3 +1,5 @@
 namespace RacingGame {
-  export class Utils {}
+  export class Utils {
+    
+  }
 }

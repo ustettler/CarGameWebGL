@@ -6,7 +6,9 @@ var RacingGame;
                 if (this.renderClock.running) {
                     requestAnimationFrame(this.render);
                 }
+                this.manager.player.move();
                 this.renderer.render(this.scene, this.camera);
+                //this.cameraGroup.position.z -= 0.05;
             };
             this.manager = pManager;
             this.init3DScene();
@@ -22,12 +24,27 @@ var RacingGame;
             this.scene.add(lightD);
             this.scene.add(this.cameraGroup);
             this.cameraGroup.add(this.camera);
+            let skyboxloader = new THREE.CubeTextureLoader();
+            this.scene.background = skyboxloader.load([
+                "media/skybox/TropicalSunnyDay_px.jpg",
+                "media/skybox/TropicalSunnyDay_nx.jpg",
+                "media/skybox/TropicalSunnyDay_py.jpg",
+                "media/skybox/TropicalSunnyDay_ny.jpg",
+                "media/skybox/TropicalSunnyDay_pz.jpg",
+                "media/skybox/TropicalSunnyDay_nz.jpg"
+            ]);
             this.renderer = new THREE.WebGLRenderer({ antialias: true });
             this.resizeEngine();
             document.body.appendChild(this.renderer.domElement);
             let myloader = new THREE.ObjectLoader();
             myloader.load("media/models/models_combined.json", (object) => {
                 this.scene.add(object);
+                this.manager.player.refPlayerModel = this.scene.getObjectByName("car");
+                //set material properties
+                let mainMaterial1 = this.scene.getObjectByName("Path").material;
+                mainMaterial1.map.wrapS = THREE.RepeatWrapping;
+                mainMaterial1.map.wrapT = THREE.RepeatWrapping;
+                mainMaterial1.map.repeat.set(1, 1);
                 this.renderClock = new THREE.Clock();
                 this.manager.gameState = RacingGame.GameState.Start;
                 this.startRenderLoop();
@@ -47,7 +64,8 @@ var RacingGame;
             this.renderClock.start();
             this.render();
         }
-        stopRenderLoop() { }
+        stopRenderLoop() {
+        }
     }
     RacingGame.Engine = Engine;
 })(RacingGame || (RacingGame = {}));

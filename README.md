@@ -4,4 +4,4 @@
 
 ## [Demo](https://www.web-man.ch/cargame/)
 
-## Note: unfortunately works only on the desktop, it requires a keyboard.
+## Note: unfortunately works only on the desktop computer, it requires a keyboard.

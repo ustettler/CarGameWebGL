@@ -48,6 +48,9 @@ namespace RacingGame {
         (object:any) => {
           this.scene.add(object);
           this.manager.player.refPlayerModel = this.scene.getObjectByName("car");
+          this.manager.level.refDollarModel = this.scene.getObjectByName("Collectible");
+          this.manager.level.refObstacleModel = this.scene.getObjectByName("Barrier");
+          this.manager.level.createLevel();
           
           //set material properties
           let mainMaterial1 = (<any>this.scene.getObjectByName("Path")).material;

@@ -30,7 +30,7 @@ var RacingGame;
         }
         initListeners() {
             window.addEventListener("resize", event => {
-                console.log("resize-event");
+                this.engine.resizeEngine();
             });
             window.addEventListener("keydown", event => {
                 if (this.gameState != GameState.Init) {
@@ -47,20 +47,29 @@ var RacingGame;
                             break;
                         case "ArrowUp":
                         case "w":
-                            console.log("ArrowUp keydown");
-                            this.player.speedChanges = 1;
+                            if (this.gameState === GameState.Running) {
+                                console.log("ArrowUp keydown");
+                                this.player.speedChanges = 1;
+                            }
                             break;
                         case "ArrowDown":
                         case "s":
-                            console.log("car move slower");
-                            this.player.speedChanges = -2;
+                            if (this.gameState === GameState.Running) {
+                                console.log("car move slower");
+                                this.player.speedChanges = -2;
+                            }
                             break;
                         case " ":
                             this.gameState = GameState.Running;
                             break;
                         case "r":
-                            console.log("r");
                             this.player.reset();
+                            this.gameState = GameState.Start;
+                            break;
+                        case "c":
+                            if (this.gameState === GameState.Start) {
+                                this.level.createLevel();
+                            }
                             break;
                     }
                 }

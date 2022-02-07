@@ -33,6 +33,11 @@ var RacingGame;
             this.refPlayerModel.position.z -= (this.speed * 0.01);
             this.manager.engine.cameraGroup.position.z = this.refPlayerModel.position.z;
             $("#speedData").html("" + Math.floor(this.speed));
+            if (this.refPlayerModel.position.z < -1110 && this.manager.gameState === RacingGame.GameState.Running) {
+                this.manager.gameState = RacingGame.GameState.Finish;
+                this.speedChanges = -12;
+            }
+            //Collision Detection
         }
     }
     RacingGame.Player = Player;

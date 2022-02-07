@@ -44,6 +44,14 @@ namespace RacingGame {
       this.manager.engine.cameraGroup.position.z = this.refPlayerModel.position.z;
 
       $("#speedData").html(""+Math.floor(this.speed));
+
+      if (this.refPlayerModel.position.z < -1110 && this.manager.gameState === GameState.Running) {
+        this.manager.gameState = GameState.Finish;
+        this.speedChanges = -12;
+      }
+
+      //Collision Detection
+      
     }
   }
 }

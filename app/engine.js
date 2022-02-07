@@ -40,6 +40,9 @@ var RacingGame;
             myloader.load("media/models/models_combined.json", (object) => {
                 this.scene.add(object);
                 this.manager.player.refPlayerModel = this.scene.getObjectByName("car");
+                this.manager.level.refDollarModel = this.scene.getObjectByName("Collectible");
+                this.manager.level.refObstacleModel = this.scene.getObjectByName("Barrier");
+                this.manager.level.createLevel();
                 //set material properties
                 let mainMaterial1 = this.scene.getObjectByName("Path").material;
                 mainMaterial1.map.wrapS = THREE.RepeatWrapping;

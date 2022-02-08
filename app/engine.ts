@@ -51,6 +51,7 @@ namespace RacingGame {
           this.manager.level.refDollarModel = this.scene.getObjectByName("Collectible");
           this.manager.level.refObstacleModel = this.scene.getObjectByName("Barrier");
           this.manager.level.createLevel();
+          this.manager.player.reset();
           
           //set material properties
           let mainMaterial1 = (<any>this.scene.getObjectByName("Path")).material;

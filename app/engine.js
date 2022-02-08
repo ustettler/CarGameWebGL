@@ -43,6 +43,7 @@ var RacingGame;
                 this.manager.level.refDollarModel = this.scene.getObjectByName("Collectible");
                 this.manager.level.refObstacleModel = this.scene.getObjectByName("Barrier");
                 this.manager.level.createLevel();
+                this.manager.player.reset();
                 //set material properties
                 let mainMaterial1 = this.scene.getObjectByName("Path").material;
                 mainMaterial1.map.wrapS = THREE.RepeatWrapping;

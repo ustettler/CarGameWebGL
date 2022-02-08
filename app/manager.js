@@ -22,9 +22,12 @@ var RacingGame;
             else if (pNewGamestate === GameState.Running) {
                 $(".menuInfo").hide();
                 $(".rankingTable, .rankingInfo").hide();
+                this.utils.soundBackground.play();
             }
             else if (pNewGamestate === GameState.Finish) {
                 $(".rankingTable, .rankingInfo").show();
+                this.utils.soundBackground.stop();
+                this.utils.soundFinish.play();
             }
             this._gameState = pNewGamestate;
         }
@@ -38,12 +41,12 @@ var RacingGame;
                         case "ArrowLeft":
                         case "a":
                             this.player.switchLeftRightPlayer(-1);
-                            console.log("car move left");
+                            this.utils.soundChangeDirection.play();
                             break;
                         case "ArrowRight":
                         case "d":
                             this.player.switchLeftRightPlayer(1);
-                            console.log("car move right");
+                            this.utils.soundChangeDirection.play();
                             break;
                         case "ArrowUp":
                         case "w":
@@ -60,7 +63,10 @@ var RacingGame;
                             }
                             break;
                         case " ":
-                            this.gameState = GameState.Running;
+                            if (this.gameState === GameState.Start) {
+                                this.gameState = GameState.Running;
+                                this.utils.soundStart.play();
+                            }
                             break;
                         case "r":
                             this.player.reset();
@@ -75,7 +81,7 @@ var RacingGame;
                 }
             });
             window.addEventListener("keyup", event => {
-                if (this.gameState != GameState.Init) {
+                if (this.gameState === GameState.Running) {
                     switch (event.key) {
                         case "ArrowUp":
                         case "w":
